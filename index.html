@@ -2,53 +2,17 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body class="flex flex-col items-center justify-center min-h-screen gap-6 bg-pink-50">
-    <h1 class="text-3xl font-bold text-pink-700">Menstrual Cycle Calculator for someone</h1>
-
-    <div class="flex flex-col gap-4 bg-white shadow-lg p-6 rounded-xl">
-      <label class="flex flex-col">
-        <span class="mb-1 font-medium">Last Period Start Date:</span>
-        <input type="date" id="lastDate" class="border rounded-lg px-3 py-2">
-      </label>
-
-      <label class="flex flex-col">
-        <span class="mb-1 font-medium">Average Cycle Length (days):</span>
-        <input type="number" id="cycleLength" value="28" class="border rounded-lg px-3 py-2">
-      </label>
-
-      <button id="calcBtn" class="px-4 py-2 bg-pink-600 text-white rounded-lg">Calculate</button>
-    </div>
-
-    <div id="result" class="text-lg font-medium text-gray-700"></div>
+  <body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 gap-6">
+    <h1 class="text-2xl font-bold">STFU Counter: <span id="counter">0</span></h1>
+    <button id="btn" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow">Press Me</button>
 
     <script>
-      document.getElementById("calcBtn").onclick = function () {
-        const lastDate = new Date(document.getElementById("lastDate").value);
-        const cycleLength = parseInt(document.getElementById("cycleLength").value);
-
-        if (isNaN(lastDate.getTime()) || isNaN(cycleLength)) {
-          alert("Please enter valid inputs.");
-          return;
-        }
-
-        // Next period = last date + cycleLength
-        const nextPeriod = new Date(lastDate);
-        nextPeriod.setDate(lastDate.getDate() + cycleLength);
-
-        // Fertile window = Day 10 to Day 17 of cycle (roughly)
-        const fertileStart = new Date(lastDate);
-        fertileStart.setDate(lastDate.getDate() + 10);
-
-        const fertileEnd = new Date(lastDate);
-        fertileEnd.setDate(lastDate.getDate() + 17);
-
-        document.getElementById("result").innerHTML = `
-          🌸 Next Period: <b>${nextPeriod.toDateString()}</b><br>
-          🌱 Fertile Window: <b>${fertileStart.toDateString()} - ${fertileEnd.toDateString()}</b>
-        `;
+      let count = 0;
+      document.getElementById("btn").onclick = () => {
+        count++;
+        document.getElementById("counter").textContent = count;
       };
     </script>
   </body>
